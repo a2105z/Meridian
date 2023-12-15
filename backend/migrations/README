@@ -1,0 +1,15 @@
+Atlas Database Migrations
+=========================
+
+This folder contains Alembic migrations for the Atlas database schema.
+
+To run migrations (from backend/ directory):
+  python -m alembic upgrade head
+
+Or migrations run automatically when the app starts.
+
+To create a new migration (after changing models):
+  python -m alembic revision --autogenerate -m "description"
+
+To downgrade one revision:
+  python -m alembic downgrade -1

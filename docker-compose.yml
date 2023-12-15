@@ -1,0 +1,26 @@
+services:
+  api:
+    build:
+      context: .
+      target: api
+    ports:
+      - "8000:8000"
+    environment:
+      FLUID_DATABASE_URL: sqlite:////data/fluid.db
+      FLUID_SECRET_KEY: ${FLUID_SECRET_KEY:-dev-only-change-me}
+    volumes:
+      - fluid-data:/data
+
+  web:
+    build:
+      context: .
+      target: web
+      args:
+        VITE_API_URL: http://localhost:8000
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+volumes:
+  fluid-data:
